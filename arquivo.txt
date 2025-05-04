@@ -1,0 +1,7 @@
+Fazer tabela de medidas em geral 3 a 4 medidas 
+Aparecer no card principal do produto 
+Colocar em pastas ao invés de filtros
+Cinks rapidos no header 
+Seção de comentários com dicas semanais (Adicionar no painel administrativo umas opção de colocar dicas com titulo e descrição)
+Pagamento só por pix qr code ou copia e cola 
+Colocar no card de produto uma bolinha de cor

@@ -3,7 +3,7 @@
 import Image from "next/image"
 import type { Product } from "@/types/product"
 import { Button } from "@/components/ui/button"
-// import { useCart } from "@/hooks/use-cart"
+import { useCart } from "@/hooks/use-cart"
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 
@@ -12,7 +12,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  // const { addToCart } = useCart()
+  const { addToCart } = useCart()
 
   return (
     <div className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
               maximumFractionDigits: 2,
             }).format(product.price)}
           </span>
-          <Button size="sm"  className="flex items-center gap-1">{/*  onClick={() => addToCart(product)} */}
+          <Button size="sm" onClick={() => addToCart(product)}  className="flex items-center gap-1">{/*  onClick={() => addToCart(product)} */}
             <ShoppingCart className="h-4 w-4" />
             <span>Adicionar</span>
           </Button>
@@ -42,3 +42,5 @@ export function ProductCard({ product }: ProductCardProps) {
     </div>
   )
 }
+
+

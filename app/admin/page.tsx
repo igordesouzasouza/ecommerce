@@ -418,6 +418,46 @@ export default function AdminPage() {
                       </Button>
                     </div>
                   </div>
+                  <div className="space-y-2">
+                    <Label>Imagem da Tabela de Medidas </Label>
+                    <div className="border-2 border-dashed rounded-lg p-4 text-center">
+                      {imagePreview ? (
+                        <div className="relative w-full aspect-square mb-4">
+                          <img
+                            src={imagePreview || "/place.svg"}
+                            alt="Preview"
+                            className="w-full h-full object-cover rounded-md"
+                          />
+                          <Button
+                            variant="destructive"
+                            size="icon"
+                            className="absolute top-2 right-2"
+                            onClick={() => {
+                              setImagePreview(null)
+                              setImageFile(null)
+                            }}
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="py-8">
+                          <Upload className="mx-auto h-12 w-12 text-muted-foreground" />
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Arraste uma imagem ou clique para fazer upload
+                          </p>
+                        </div>
+                      )}
+                      <Input id="image" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                      <Button
+                        variant="outline"
+                        onClick={() => document.getElementById("image")?.click()}
+                        className="mt-2"
+                      >
+                        Selecionar Imagem
+                      </Button>
+                    </div>
+                  </div>
 
                   <div className="space-y-2">
                     <Label>Tamanhos Disponíveis</Label>
