@@ -5,3 +5,4 @@ Cinks rapidos no header
 Seção de comentários com dicas semanais (Adicionar no painel administrativo umas opção de colocar dicas com titulo e descrição)
 Pagamento só por pix qr code ou copia e cola 
 Colocar no card de produto uma bolinha de cor
+Retirar opções de filtros

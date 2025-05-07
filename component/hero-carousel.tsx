@@ -96,7 +96,7 @@ export function HeroCarousel() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6 md:p-10">
                 <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">{item.title}</h2>
                 <p className="text-sm md:text-lg text-white/90 mb-4 max-w-md">{item.description}</p>
-                <Button className="w-fit">Ver Coleção</Button>
+                <Button className="w-fit bg-white cursor-pointer" variant={"ghost"}>Ver Coleção</Button>
               </div>
             </div>
           </div>

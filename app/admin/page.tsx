@@ -1,6 +1,10 @@
 "use client"
 
-import type React from "react"
+// Remove this line
+// import type React from "react"
+
+// Add this line
+import React from "react"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -14,6 +18,7 @@ import { Plus, Upload, X, Edit, Trash2, LogOut, Loader2, ChevronLeft } from "luc
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { Product } from "@/types/product"
 import { useAuth } from "@/component/auth-provider"
+// import { ContactForm } from "@/component/form"
 
 // Dados simulados para o preview
 const mockProducts: Product[] = [
@@ -167,6 +172,15 @@ export default function AdminPage() {
       sizes: newProduct.sizes?.filter((s) => s !== size),
     })
   }
+  const [newTip, setNewTip] = useState({ title: "", description: "" })
+
+  const handleAddTip = () => {
+    if (!newTip.title || !newTip.description) {
+      alert("Por favor, preencha todos os campos")
+      return
+    }
+    setNewTip({ title: "", description: "" }) // Reset the form after adding
+  }
 
   const handleAddColor = () => {
     if (!newColor) return
@@ -219,9 +233,21 @@ export default function AdminPage() {
       </div>
     )
   }
+  const [sizeTableFile, setSizeTableFile] = useState<File | null>(null)
+  const [sizeTablePreview, setSizeTablePreview] = useState<string | null>(null)
 
+  // Add this new handler
+  const handleSizeTableUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setSizeTableFile(file)
+    const imageUrl = URL.createObjectURL(file)
+    setSizeTablePreview(imageUrl)
+  }
+  
   return (
-    <div className="container mx-auto px-4 py-8">
+    <Tabs className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center gap-4">
           <h1 className="text-3xl font-bold">Painel Administrativo</h1>
@@ -231,11 +257,11 @@ export default function AdminPage() {
           Voltar
         </Button>
       </div>
-
       <Tabs defaultValue="products" className="w-full">
         <TabsList className="mb-6">
           <TabsTrigger value="products">Produtos</TabsTrigger>
           <TabsTrigger value="add">Adicionar Produto</TabsTrigger>
+          {/* <TabsTrigger value="tips">Dicas Semanais</TabsTrigger> */}
         </TabsList>
 
         <TabsContent value="products">
@@ -249,6 +275,7 @@ export default function AdminPage() {
                 <div className="flex justify-center py-8">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
+
               ) : (
                 <Table>
                   <TableHeader>
@@ -419,45 +446,51 @@ export default function AdminPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label>Imagem da Tabela de Medidas </Label>
-                    <div className="border-2 border-dashed rounded-lg p-4 text-center">
-                      {imagePreview ? (
-                        <div className="relative w-full aspect-square mb-4">
-                          <img
-                            src={imagePreview || "/place.svg"}
-                            alt="Preview"
-                            className="w-full h-full object-cover rounded-md"
-                          />
-                          <Button
-                            variant="destructive"
-                            size="icon"
-                            className="absolute top-2 right-2"
-                            onClick={() => {
-                              setImagePreview(null)
-                              setImageFile(null)
-                            }}
-                          >
-                            <X className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ) : (
-                        <div className="py-8">
-                          <Upload className="mx-auto h-12 w-12 text-muted-foreground" />
-                          <p className="mt-2 text-sm text-muted-foreground">
-                            Arraste uma imagem ou clique para fazer upload
-                          </p>
-                        </div>
-                      )}
-                      <Input id="image" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
-                      <Button
-                        variant="outline"
-                        onClick={() => document.getElementById("image")?.click()}
-                        className="mt-2"
-                      >
-                        Selecionar Imagem
-                      </Button>
-                    </div>
-                  </div>
+    <Label>Imagem da Tabela de Medidas</Label>
+    <div className="border-2 border-dashed rounded-lg p-4 text-center">
+      {sizeTablePreview ? (
+        <div className="relative w-full aspect-square mb-4">
+          <img
+            src={sizeTablePreview}
+            alt="Tabela de Medidas Preview"
+            className="w-full h-full object-cover rounded-md"
+          />
+          <Button
+            variant="destructive"
+            size="icon"
+            className="absolute top-2 right-2"
+            onClick={() => {
+              setSizeTablePreview(null)
+              setSizeTableFile(null)
+            }}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+      ) : (
+        <div className="py-8">
+          <Upload className="mx-auto h-12 w-12 text-muted-foreground" />
+          <p className="mt-2 text-sm text-muted-foreground">
+            Arraste uma imagem da tabela de medidas ou clique para fazer upload
+          </p>
+        </div>
+      )}
+      <Input 
+        id="sizeTableImage" 
+        type="file" 
+        accept="image/*" 
+        className="hidden" 
+        onChange={handleSizeTableUpload} 
+      />
+      <Button
+        variant="outline"
+        onClick={() => document.getElementById("sizeTableImage")?.click()}
+        className="mt-2"
+      >
+        Selecionar Tabela de Medidas
+      </Button>
+    </div>
+  </div>
 
                   <div className="space-y-2">
                     <Label>Tamanhos Disponíveis</Label>
@@ -483,6 +516,7 @@ export default function AdminPage() {
                       </Button>
                     </div>
                   </div>
+                  
 
                   <div className="space-y-2">
                     <Label>Cores Disponíveis</Label>
@@ -525,7 +559,9 @@ export default function AdminPage() {
             </CardFooter>
           </Card>
         </TabsContent>
+        
       </Tabs>
-    </div>
+      
+    </Tabs>
   )
 }
