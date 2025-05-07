@@ -79,7 +79,7 @@ export default function AdminPage() {
   // Versão simplificada para preview
   const { isAuthenticated, logout } = useAuth()
   const router = useRouter()
-
+ 
   // Verificar autenticação
   useEffect(() => {
     if (!isAuthenticated) {
@@ -120,7 +120,12 @@ export default function AdminPage() {
         }
 
         setProducts([...products, productData])
-
+        //setProducts((prev) => [...prev, productData])
+        // Adicionar o novo produto à lista de produtos
+        // // Simulação de upload de imagem
+        // if (imageFile) {
+          // Aqui você pode fazer o upload da imagem para o servidor
+          // e obter a URL da imagem      
         // Limpar o formulário
         setNewProduct({
           name: "",
