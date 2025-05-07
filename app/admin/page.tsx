@@ -18,9 +18,8 @@ import { Plus, Upload, X, Edit, Trash2, LogOut, Loader2, ChevronLeft } from "luc
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { Product } from "@/types/product"
 import { useAuth } from "@/component/auth-provider"
-// import { ContactForm } from "@/component/form"
 
-// Dados simulados para o preview
+// dados mockados para o preview
 const mockProducts: Product[] = [
   {
     id: "1",
