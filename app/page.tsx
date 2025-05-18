@@ -3,21 +3,21 @@
 import { useState } from "react"
 import { HeroCarousel } from "@/component/hero-carousel"
 import { ProductGrid } from "@/component/product-grid"
-import { ProductFilter, type FilterOptions } from "@/component/product-filter"
+// import { ProductFilter, type FilterOptions } from "@/component/product-filter"
 import { FabricSection } from "@/component/fabric-section"
 import { Footer } from "@/component/footer"
 
 export default function Home() {
-  const [filters, setFilters] = useState<FilterOptions>({
-    categories: [],
-    priceRange: [0, 500],
-    fabricTypes: [],
-  })
+  // const [filters, setFilters] = useState<FilterOptions>({
+  //   categories: [],
+  //   priceRange: [0, 500],
+  //   fabricTypes: [],
+  // })
 
-  const handleFilterChange = (newFilters: FilterOptions) => {
-    setFilters(newFilters)
-    console.log("Filtros aplicados:", newFilters)
-  }
+  // const handleFilterChange = (newFilters: FilterOptions) => {
+  //   setFilters(newFilters)
+  //   console.log("Filtros aplicados:", newFilters)
+  // }
 
   return (
     <main>
@@ -31,10 +31,10 @@ export default function Home() {
         <section id="produtos">
           <h2 className="text-3xl font-bold mb-8">Nossos Produtos</h2>
           <div className="flex flex-col md:flex-row gap-8">
-            <ProductFilter onFilterChange={handleFilterChange} />
+            {/* <ProductFilter onFilterChange={handleFilterChange} />
             <div className="flex-1">
               <ProductGrid filters={filters} />
-            </div>
+            </div> */}
           </div>
         </section>
         <section className="mb-16" id="tecidos">
